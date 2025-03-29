@@ -11,7 +11,7 @@ export default function Home() {
     <div className={styles.page}>
       <main className={styles.main}>
         <h1 id={styles.matches}>Enter Your Information</h1>
-        <h2>Upload 1-5 Images of Yourself</h2>
+        <h2>Upload a Profile Picture</h2>
         <CldUploadWidget 
           uploadPreset="user-image-upload"
           onSuccess={(result) => {
