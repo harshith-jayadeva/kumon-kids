@@ -319,7 +319,41 @@ a.secondary {
   display: block;
   max-width:1000px;
   max-height: 500px;
-  width: 100%;
+  width: auto;
   height: auto;
+  object-fit: contain;
   image-resolution: 300dpi;
+}
+
+.uploadButton {
+  gap: 16px;
+  color: white;
+  appearance: none;
+  border-radius: 128px;
+  height: 48px;
+  border: none;
+  border: 1px solid transparent;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 500;
+  width: 170px;
+  background: var(--foreground);
+  color: var(--background);
+  gap: 8px;
+  border-color: var(--gray-alpha-200);
+  min-width: 158px;
+  font-size: 14px;
+  height: 40px;
+  padding: 0 16px;
+  
+}
+
+.uploadButton:hover {
+  background: var(--accent1);
+  border-color: transparent;
 }

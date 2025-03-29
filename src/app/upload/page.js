@@ -12,7 +12,7 @@ export default function Home() {
       <main className={styles.main}>
         <h1 id={styles.matches}>Enter Your Information</h1>
         <h2>Upload 1-5 Images of Yourself</h2>
-        <CldUploadWidget
+        <CldUploadWidget 
           uploadPreset="user-image-upload"
           onSuccess={(result) => {
             console.log("the image upload worked yay");
@@ -21,7 +21,7 @@ export default function Home() {
           }}
         >
           {({ open }) => {
-            return <button onClick={() => open()}>Upload an Image</button>;
+            return <button className={styles.uploadButton} onClick={() => open()}>Upload an Image</button>;
           }}
           
         </CldUploadWidget>
@@ -29,7 +29,7 @@ export default function Home() {
             aria-hidden
             src={url}
             alt="uploaded image"
-            style={{maxWidth: '100%', maxHeight: '300px'}}
+            style={{maxWidth: '1000px', maxHeight: 'auto'}}
           />
         )}
         <div className={styles.button}>
