@@ -258,11 +258,11 @@ a.secondary {
     text-align: center;
   }
 
-  .ctas {
+  .button {
     flex-direction: column;
   }
 
-  .ctas a {
+  .button a {
     font-size: 14px;
     height: 40px;
     padding: 0 16px;

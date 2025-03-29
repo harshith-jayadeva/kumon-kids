@@ -25,7 +25,7 @@ export default function Home() {
           }}
         </CldUploadWidget>
         <h1>{url}</h1>
-        <div className={styles.ctas}>
+        <div className={styles.button}>
           <Link href="/matches" className={styles.primary}>
             <Image
               className={styles.globe}

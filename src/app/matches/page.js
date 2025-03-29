@@ -8,7 +8,7 @@ export default function Home() {
       <main className={styles.main}>
         <h1>Matches</h1>
         
-        <div className={styles.ctas}>
+        <div className={styles.button}>
           <div className={styles.mContainer}>
             <div className={styles.mItem}>
               <img src="/match1.jpg" alt="Image" className={styles.matchImage} />
@@ -40,7 +40,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className={styles.ctas}>
+        <div className={styles.button}>
           <Link href="./" className={styles.primary}>
             Start Over
           </Link>
