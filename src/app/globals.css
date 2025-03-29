@@ -1,12 +1,17 @@
 :root {
-  --background: #ffffff;
+  --background: linear-gradient(#ffffff, #c8d8e4);
   --foreground: #171717;
+  --accent2: #c8d8e4;
+  --accent1: #2b6777;
+
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: linear-gradient(#ffffff, #9cb9cf);
+    --foreground: #171717;
+    --accent1: #c8d8e4;
+    --accent2: #2b6777;
   }
 }
 

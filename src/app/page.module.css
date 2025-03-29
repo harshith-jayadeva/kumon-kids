@@ -2,6 +2,7 @@
   --gray-rgb: 0, 0, 0;
   --gray-alpha-200: rgba(var(--gray-rgb), 0.08);
   --gray-alpha-100: rgba(var(--gray-rgb), 0.05);
+  
 
   --button-primary-hover: #383838;
   --button-secondary-hover: #f2f2f2;
@@ -11,8 +12,8 @@
   align-items: center;
   justify-items: center;
   min-height: 100svh;
-  padding: 80px;
-  gap: 64px;
+  padding: 10;
+  gap: 0px;
   font-family: var(--font-geist-sans);
 }
 
@@ -44,6 +45,31 @@
   list-style-position: inside;
 }
 
+@font-face {
+  font-family: "Twinkle Star";
+  src: url("/fonts/Twinkle_Star/TwinkleStar-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+
+.twinkle-star-regular {
+  font-family: "Twinkle Star", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+
+.main h1{
+  display: block;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  font-family: "Twinkle Star", cursive;
+  font-size: 150px;
+
+}
+
 .main li:not(:last-of-type) {
   margin-bottom: 8px;
 }
@@ -56,22 +82,112 @@
   font-weight: 600;
 }
 
-.ctas {
+.main p{
   display: flex;
-  gap: 16px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
-.ctas a {
+.container {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  width: 100%;
+  
+}
+
+.container svg {
+
+  width: 100%;
+  height: 350px;
+}
+
+.container text{
+  color: var(--accent2);
+  font-weight: 100;
+  font-size: clamp(380px, 90vw, 480px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+@media (max-width: 1000px){
+  .container text{
+    color: var(--accent2);
+    font-weight: 100;
+    font-size: 50vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+}
+
+@media (max-width: 700px){
+  .container text{
+    color: var(--accent2);
+    font-weight: 100;
+    font-size: 80vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+}
+
+.handwriting {
+  font-family: "Twinkle Star", cursive;
+  fill: transparent;
+  stroke: var(--accent2);
+  stroke-width: 4;
+  stroke-dasharray: 800;
+  stroke-dashoffset:  0;
+  animation: writing 5s ease forwards, fillText 3s ease forwards;
+  animation-duration: 5s, 3s;
+  animation-delay: 0s, 3.5s;
+}
+
+@keyframes writing{
+  0% {
+    stroke-dashoffset: 0;
+  }
+
+  100%{
+    stroke-dasharray: 3200;
+  }
+}
+
+@keyframes fillText {
+  0%{
+    fill:transparent;
+  }
+
+  100%{
+    fill: var(--accent2);
+  }
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  gap: 16px;
+  color: white;
+}
+
+.button a {
+  
   appearance: none;
   border-radius: 128px;
   height: 48px;
   padding: 0 20px;
   border: none;
   border: 1px solid transparent;
-  transition:
-    background 0.2s,
-    color 0.2s,
-    border-color 0.2s;
+  transition: background-color 0.3s ease;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -111,7 +227,7 @@ a.secondary {
 /* Enable hover only on non-touch devices */
 @media (hover: hover) and (pointer: fine) {
   a.primary:hover {
-    background: var(--button-primary-hover);
+    background: var(--accent1);
     border-color: transparent;
   }
 
