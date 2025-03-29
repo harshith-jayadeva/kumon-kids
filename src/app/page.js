@@ -1,23 +1,28 @@
+"use client";
 import Image from "next/image";
 import styles from "./page.module.css";
 import Link from "next/link";
 
 export default function Home() {
   return (
+    
     <div className={styles.page}>
       <main className={styles.main}>
-        <h1>Meet new People!</h1>
+        <div className={styles.container}>
+          <svg viewBox="0 0 4000 750" width="100%" height="100%">
+            <text className={styles.handwriting} x="50%" y="50%" textAnchor="middle">Meet New People</text>
+          </svg>
+          
+          {/* <h1>Meet new</h1>
+          <h1>People!</h1> */}
+        </div>
+        
 
-        <div className={styles.ctas}>
+        <div className={styles.button}>
           <Link href="/upload" className={styles.primary}>
-            {/* <Image
-              className={styles.globe}
-              src="/globe.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            /> */}
-            Start
+
+            Start!
+
           </Link>
         </div>
         <p>Takes less than 1 minute</p>
