@@ -10,13 +10,13 @@ export default function Home() {
 
         <div className={styles.ctas}>
           <Link href="/upload" className={styles.primary}>
-            <Image
+            {/* <Image
               className={styles.globe}
               src="/globe.svg"
               alt="Vercel logomark"
               width={20}
               height={20}
-            />
+            /> */}
             Start
           </Link>
         </div>

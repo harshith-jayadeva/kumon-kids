@@ -7,16 +7,41 @@ export default function Home() {
     <div className={styles.page}>
       <main className={styles.main}>
         <h1>Matches</h1>
+        
+        <div className={styles.ctas}>
+          <div className={styles.mContainer}>
+            <div className={styles.mItem}>
+              <img src="/match1.jpg" alt="Image" className={styles.matchImage} />
+              <h2>Name 1</h2>
+              <h4>Similar interests</h4>
+              <p>interest 1, interest 2, interest 3</p>
+              <br></br>
+              <h4>Bio</h4>
+              <p>Hi! This is a description.</p>
+            </div>
+            <div className={styles.mItem}>
+            <img src="/match2.jpg" alt="Image" className={styles.matchImage} />
+              <h2>Name 2</h2>
+              <h4>Similar interests</h4>
+              <p>interest 1, interest 2, interest 3</p>
+              <br></br>
+              <h4>Bio</h4>
+              <p>Hi! This is a description.</p>
+            </div>
+            <div className={styles.mItem}>
+            <img src="/match3.jpg" alt="Image" className={styles.matchImage} />
+              <h2>Name 3</h2>
+              <h4>Similar interests</h4>
+              <p>interest 1, interest 2, interest 3</p>
+              <br></br>
+              <h4>Bio</h4>
+              <p>Hi! This is a description.</p>
+            </div>
+          </div>
+        </div>
 
         <div className={styles.ctas}>
           <Link href="./" className={styles.primary}>
-            <Image
-              className={styles.globe}
-              src="/globe.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
             Start Over
           </Link>
         </div>
