@@ -20,9 +20,11 @@ export default function Home() {
             setUrl(result.info.secure_url);
           }}
         >
-          {({ open }) => {
-            return <button className={styles.uploadButton} onClick={() => open()}>Upload an Image</button>;
-          }}
+          
+            {({ open }) => {
+              return <div className={styles.buttonPapa}><button className={styles.uploadButton} onClick={() => open()}>Upload an Image</button></div>;
+            }}
+          
           
         </CldUploadWidget>
         {url != "nothing" && (<img className={styles.uploaded}
