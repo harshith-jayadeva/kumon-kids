@@ -20,7 +20,9 @@ export default function Home() {
 
         <div className={styles.button}>
           <Link href="/upload" className={styles.primary}>
+
             Start!
+
           </Link>
         </div>
         <p>Takes less than 1 minute</p>
