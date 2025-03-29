@@ -28,6 +28,14 @@
     --button-primary-hover: #c1e2f8;
     --button-secondary-hover: #1a1a1a;
   }
+  
+  .handwriting {
+    stroke: var(--accent1);
+  }
+
+  .container text{
+    stroke: var(--accent1);
+  }
 }
 
 .main {
@@ -113,7 +121,7 @@
 
 @media (max-width: 1000px){
   .container text{
-    color: var(--accent2);
+    color: var(--accent1);
     font-weight: 100;
     font-size: 50vw;
     display: flex;
@@ -125,7 +133,7 @@
 
 @media (max-width: 700px){
   .container text{
-    color: var(--accent2);
+    color: var(--accent1);
     font-weight: 100;
     font-size: 80vw;
     display: flex;
@@ -138,7 +146,7 @@
 .handwriting {
   font-family: "Twinkle Star", cursive;
   fill: transparent;
-  stroke: var(--accent2);
+  stroke: var(--accent1);
   stroke-width: 4;
   stroke-dasharray: 800;
   stroke-dashoffset:  0;
@@ -163,7 +171,7 @@
   }
 
   100%{
-    fill: var(--accent2);
+    fill: var(--accent1);
   }
 }
 
