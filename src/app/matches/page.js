@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <div className={styles.page}>
       <main className={styles.main}>
-        <h1>Matches</h1>
+        <h1 id={styles.matches}>Matches</h1>
         
         <div className={styles.button}>
           <div className={styles.mContainer}>

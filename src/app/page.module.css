@@ -33,6 +33,8 @@
 .main {
   display: flex;
   flex-direction: column;
+  text-align: center;
+  justify-content: center;
   gap: 32px;
   grid-row-start: 2;
 }
@@ -82,13 +84,6 @@
   padding: 2px 4px;
   border-radius: 4px;
   font-weight: 600;
-}
-
-.main p{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
 }
 
 .container {
@@ -175,7 +170,7 @@
 .button {
   display: flex;
   align-items: center;
-  text-align: center;
+  text-align: left;
   justify-content: center;
   gap: 16px;
   color: white;
@@ -198,6 +193,7 @@
   line-height: 20px;
   font-weight: 500;
 }
+
 
 a.primary {
   background: var(--foreground);
@@ -287,6 +283,7 @@ a.secondary {
 
 .mContainer {
   display: flex;
+  align-items: center;
   flex-direction: row;
   flex-wrap: wrap;
   gap: 5px;
@@ -295,9 +292,15 @@ a.secondary {
 
 .mItem {
   background: var(--accent2);
+  align-items: left;
+  text-align: left;
   color: var(--foreground);
   flex: 1 1 auto;
   justify-content: center;
   padding: 1rem;
   border-radius: 30px;
+}
+
+#matches {
+  font-size: 100px;
 }

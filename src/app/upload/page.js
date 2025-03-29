@@ -11,7 +11,7 @@ export default function Home() {
   return (
     <div className={styles.page}>
       <main className={styles.main}>
-        <h1>Upload 2-5 Images</h1>
+        <h2>Upload 2-5 Images</h2>
         <CldUploadWidget
           uploadPreset="user-image-upload"
           onSuccess={(result) => {
@@ -24,16 +24,9 @@ export default function Home() {
             return <button onClick={() => open()}>Upload an Image</button>;
           }}
         </CldUploadWidget>
-        <h1>{url}</h1>
+        <h3 id={styles.matches}>{url}</h3>
         <div className={styles.button}>
           <Link href="/matches" className={styles.primary}>
-            <Image
-              className={styles.globe}
-              src="/globe.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
             Get your matches!
           </Link>
         </div>
