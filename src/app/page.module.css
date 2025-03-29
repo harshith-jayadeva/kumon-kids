@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Twinkle+Star&display=swap");
+
 .page {
   --gray-rgb: 0, 0, 0;
   --gray-alpha-200: rgba(var(--gray-rgb), 0.08);
@@ -58,8 +60,8 @@
 }
 
 @font-face {
-  font-family: "Twinkle Star";
-  src: url("/fonts/Twinkle_Star/TwinkleStar-Regular.ttf") format("truetype");
+  font-family: "Twinkle Star", cursive;
+  src: url("https://fonts.googleapis.com/css2?family=Twinkle+Star&display=swap") format("truetype");
   font-weight: 400;
   font-style: normal;
 }
@@ -311,4 +313,13 @@ a.secondary {
 
 #matches {
   font-size: 100px;
+}
+
+.uploaded {
+  display: block;
+  max-width:1000px;
+  max-height: 500px;
+  width: 100%;
+  height: auto;
+  image-resolution: 300dpi;
 }

@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import styles from "../page.module.css";
 import Link from "next/link";
 import { CldUploadWidget } from "next-cloudinary";
@@ -11,7 +10,8 @@ export default function Home() {
   return (
     <div className={styles.page}>
       <main className={styles.main}>
-        <h2>Upload 2-5 Images</h2>
+        <h1 id={styles.matches}>Enter Your Information</h1>
+        <h2>Upload 1-5 Images of Yourself</h2>
         <CldUploadWidget
           uploadPreset="user-image-upload"
           onSuccess={(result) => {
@@ -23,8 +23,15 @@ export default function Home() {
           {({ open }) => {
             return <button onClick={() => open()}>Upload an Image</button>;
           }}
+          
         </CldUploadWidget>
-        <h3 id={styles.matches}>{url}</h3>
+        {url != "nothing" && (<img className={styles.uploaded}
+            aria-hidden
+            src={url}
+            alt="uploaded image"
+            style={{maxWidth: '100%', maxHeight: '300px'}}
+          />
+        )}
         <div className={styles.button}>
           <Link href="/matches" className={styles.primary}>
             Get your matches!
