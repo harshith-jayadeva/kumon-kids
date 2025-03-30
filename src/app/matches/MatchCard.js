@@ -11,7 +11,7 @@ export default function MatchCard({ userName, compatibility, bio, tags }) {
     const loadImage = async () => {
       const url = await getUserImageFromName(userName);
       console.log("url ", url);
-      setImageUrl(url[0]);
+      setImageUrl(Array.isArray(url) && url.length > 0 ? url[0] : null);
     };
 
     const loadBio = async () => {

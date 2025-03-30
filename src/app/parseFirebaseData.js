@@ -1,5 +1,5 @@
 import { db } from "../../firebaseConfig";
-import { collection, getDocs, where } from "firebase/firestore";
+import { collection, getDocs, query, where } from "firebase/firestore";
 
 export const convertFirebaseDataToUserDictionary = async (currentUserId) => {
   let allUsersWithBios = {};
@@ -23,10 +23,11 @@ export const convertFirebaseDataToUserDictionary = async (currentUserId) => {
 
 export const getUserImageFromName = async (userName) => {
   try {
-    const querySnapshot = await getDocs(
+    const q = query(
       collection(db, "users"),
       where("first_name", "==", userName)
     );
+    const querySnapshot = await getDocs(q);
 
     if (querySnapshot.empty) {
       console.log("No matching documents.");
@@ -35,7 +36,7 @@ export const getUserImageFromName = async (userName) => {
 
     let imageUrl = null;
     querySnapshot.forEach((doc) => {
-      imageUrl = doc.data().image_urls; // Assuming image_urls is a string or an array
+      imageUrl = doc.data().image_urls; // This is an array
     });
 
     return imageUrl;
