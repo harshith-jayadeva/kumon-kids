@@ -43,17 +43,20 @@ export default async function LocalTextDisplay() {
           <h1 id={styles.matches}>Matches</h1>
           
           <div className={styles.button}>
-            <div className={styles.mContainer}>
-              {matches.map((match) => (
-                <div key={match.name} className={styles.mItem}>
-                  <img src={`/images/${match.profilePic}`} alt={match.name} className="profile-pic" />
-                  <h2>{match.name}</h2>
-                  <p>{match.bio}</p>
-                  <p><strong>Compatibility:</strong> {match.compatibility}%</p>
-                  <p><strong>Tags:</strong> {match.tags.join(", ")}</p>
-                </div>
-              ))}
+            <div className={styles.mWrapper}>
+              <div className={styles.mContainer}>
+                {matches.map((match) => (
+                  <div key={match.name} className={styles.mItem}>
+                    <img src={`/images/${match.profilePic}`} alt={match.name} className="profile-pic" />
+                    <h2>{match.name}</h2>
+                    <p>{match.bio}</p>
+                    <p><strong>Compatibility:</strong> {match.compatibility}%</p>
+                    <p><strong>Tags:</strong> {match.tags.join(", ")}</p>
+                  </div>
+                ))}
+              </div>
             </div>
+            
           </div>
 
           <div className={styles.button}>
