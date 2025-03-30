@@ -18,27 +18,28 @@ const peopleBios = {
 
 export async function POST(request) {
     try {
-        const lastPersonKey = Object.keys(peopleBios).pop();
-        const lastPersonBio = peopleBios[lastPersonKey];
+        const { userInput } = await request.json();
+
+        if (!userInput) {
+            return NextResponse.json({ error: "No user input provided" }, { status: 400 });
+        }
 
         let comparisonMessages = "";
         for (const key in peopleBios) {
-            if (key !== lastPersonKey) {
-                comparisonMessages += `Compare ${lastPersonKey} ("${lastPersonBio}") with ${key} ("${peopleBios[key]}"). Output EXACTLY like this example, NO other text:\nComparison with ${key}: * Compatibility Percentage: 50% * Relevant Tags: #example #tags\n\n`;
-            }
+            comparisonMessages += `Compare the following user input with ${key} ("${peopleBios[key]}"). Output EXACTLY like this example, NO other text:\nComparison with ${key}: * Compatibility Percentage: 50% * Relevant Tags: #example #tags\n\n`;
         }
 
         const stream = await groq.chat.completions.create({
             messages: [{
                 role: "system",
-                content: `You will compare the last person in the list with all the other people in the list. Here is the people bios information: ${JSON.stringify(peopleBios)}. For each comparison, output EXACTLY like this example, NO other text:\nComparison with [Other Person's Name]: * Compatibility Percentage: 50% * Relevant Tags: #example #tags\n\n`
+                content: `You will compare the user's input with each person in the database. Here is the people bios information: ${JSON.stringify(peopleBios)}. For each comparison, output EXACTLY like this example, NO other text:\nComparison with [Person's Name]: * Compatibility Percentage: 50% * Relevant Tags: #example #tags\n\n`
             },
             {
                 role: "user",
-                content: comparisonMessages
+                content: `User Input: ${userInput}\n\n${comparisonMessages}`
             }],
             model: "llama-3.3-70b-versatile",
-            temperature: 0.5, // Lower temperature
+            temperature: 0.5,
             max_completion_tokens: 1024,
             top_p: 1,
             stream: true,

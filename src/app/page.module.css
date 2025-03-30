@@ -4,7 +4,7 @@
   --gray-rgb: 0, 0, 0;
   --gray-alpha-200: rgba(var(--gray-rgb), 0.08);
   --gray-alpha-100: rgba(var(--gray-rgb), 0.05);
-  
+
 
   --button-primary-hover: #2b6777;
   --button-secondary-hover: #c8d8e4;
@@ -30,12 +30,12 @@
     --button-primary-hover: #c1e2f8;
     --button-secondary-hover: #1a1a1a;
   }
-  
+
   .handwriting {
     stroke: var(--accent1);
   }
 
-  .container text{
+  .container text {
     stroke: var(--accent1);
   }
 }
@@ -74,7 +74,7 @@
 }
 
 
-.main h1{
+.main h1 {
   display: block;
   justify-content: center;
   text-align: center;
@@ -102,7 +102,7 @@
   text-align: center;
   align-items: center;
   width: 100%;
-  
+
 }
 
 .container svg {
@@ -111,7 +111,7 @@
   height: 350px;
 }
 
-.container text{
+.container text {
   color: var(--accent2);
   font-weight: 100;
   font-size: clamp(380px, 90vw, 480px);
@@ -121,8 +121,8 @@
   text-align: center;
 }
 
-@media (max-width: 1000px){
-  .container text{
+@media (max-width: 1000px) {
+  .container text {
     color: var(--accent1);
     font-weight: 100;
     font-size: 50vw;
@@ -133,8 +133,8 @@
   }
 }
 
-@media (max-width: 700px){
-  .container text{
+@media (max-width: 700px) {
+  .container text {
     color: var(--accent1);
     font-weight: 100;
     font-size: 80vw;
@@ -151,28 +151,28 @@
   stroke: var(--accent1);
   stroke-width: 4;
   stroke-dasharray: 800;
-  stroke-dashoffset:  0;
+  stroke-dashoffset: 0;
   animation: writing 5s ease forwards, fillText 3s ease forwards;
   animation-duration: 5s, 3s;
   animation-delay: 0s, 3.5s;
 }
 
-@keyframes writing{
+@keyframes writing {
   0% {
     stroke-dashoffset: 0;
   }
 
-  100%{
+  100% {
     stroke-dasharray: 3200;
   }
 }
 
 @keyframes fillText {
-  0%{
-    fill:transparent;
+  0% {
+    fill: transparent;
   }
 
-  100%{
+  100% {
     fill: var(--accent1);
   }
 }
@@ -187,7 +187,7 @@
 }
 
 .button a {
-  
+
   appearance: none;
   border-radius: 128px;
   height: 48px;
@@ -316,7 +316,7 @@ a.secondary {
 
 .uploaded {
   display: block;
-  max-width:1000px;
+  max-width: 1000px;
   max-height: 500px;
   width: auto;
   height: auto;
@@ -351,8 +351,56 @@ a.secondary {
   border-color: transparent;
 }
 
-.buttonPapa{
+.buttonPapa {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  max-width: 600px;
+  margin: 2rem auto;
+}
+
+.input {
+  width: 100%;
+  min-height: 150px;
+  padding: 1rem;
+  border: 2px solid #eaeaea;
+  border-radius: 8px;
+  font-size: 1rem;
+  resize: vertical;
+  font-family: inherit;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #0070f3;
+}
+
+.error {
+  color: #ff4444;
+  font-size: 1.2rem;
+  margin: 1rem 0;
+  padding: 1rem;
+  background: rgba(255, 68, 68, 0.1);
+  border-radius: 8px;
+}
+
+.results {
+  text-align: left;
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 1rem;
+  background: var(--gray-alpha-100);
+  border-radius: 8px;
+}
+
+.results p {
+  margin: 0.5rem 0;
+  line-height: 1.5;
 }

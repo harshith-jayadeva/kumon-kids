@@ -1,33 +1,47 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Image from "next/image";
 import styles from "./page.module.css";
 import Link from "next/link";
 
 export default function Home() {
   const [groqResponse, setGroqResponse] = useState('');
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [userInput, setUserInput] = useState('');
+  const [error, setError] = useState('');
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const response = await fetch('/api/groq', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-        });
-        const data = await response.json();
-        setGroqResponse(data.aiResponse);
-        await writeTextFile(data.aiResponse);
-      } catch (error) {
-        console.error("API Error:", error);
-        setGroqResponse("Error fetching data.");
-      } finally {
-        setLoading(false);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setError('');
+
+    try {
+      const response = await fetch('/api/groq', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ userInput }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch data');
       }
+
+      const data = await response.json();
+
+      if (data.error) {
+        throw new Error(data.error);
+      }
+
+      setGroqResponse(data.aiResponse);
+      await writeTextFile(data.aiResponse);
+    } catch (error) {
+      console.error("API Error:", error);
+      setError(error.message || "Error fetching data. Please try again.");
+    } finally {
+      setLoading(false);
     }
-    fetchData();
-  }, []);
+  };
 
   const writeTextFile = async (result) => {
     try {
@@ -42,24 +56,55 @@ export default function Home() {
       }
     } catch (error) {
       console.error('Error writing text file:', error);
-      alert('Error writing text file.');
+      // Don't show alert to user, just log the error
     }
   };
 
-  if(loading){
-      return (
-          <div>
-              <h1>Meet a Friend Compatibility Results:</h1>
-              <p>Loading...</p>
+  if (loading) {
+    return (
+      <div className={styles.page}>
+        <main className={styles.main}>
+          <div className={styles.container}>
+            <h1>Meet a Friend Compatibility Results:</h1>
+            <p>Loading...</p>
           </div>
-      )
+        </main>
+      </div>
+    )
   }
 
-  if (groqResponse){
+  if (error) {
     return (
-      <div>
-        <h1>Meet a Friend Compatibility Results:</h1>
-        <p>{groqResponse}</p>
+      <div className={styles.page}>
+        <main className={styles.main}>
+          <div className={styles.container}>
+            <h1>Meet a Friend Compatibility Results:</h1>
+            <p className={styles.error}>{error}</p>
+            <button onClick={() => setError('')} className={styles.primary}>
+              Try Again
+            </button>
+          </div>
+        </main>
+      </div>
+    );
+  }
+
+  if (groqResponse) {
+    return (
+      <div className={styles.page}>
+        <main className={styles.main}>
+          <div className={styles.container}>
+            <h1>Meet a Friend Compatibility Results:</h1>
+            <div className={styles.results}>
+              {groqResponse.split('\n').map((line, index) => (
+                <p key={index}>{line}</p>
+              ))}
+            </div>
+            <button onClick={() => setGroqResponse('')} className={styles.primary}>
+              Try Again
+            </button>
+          </div>
+        </main>
       </div>
     );
   }
@@ -73,11 +118,18 @@ export default function Home() {
           </svg>
         </div>
 
-        <div className={styles.button}>
-          <Link href="/upload" className={styles.primary}>
-            Start!
-          </Link>
-        </div>
+        <form onSubmit={handleSubmit} className={styles.form}>
+          <textarea
+            value={userInput}
+            onChange={(e) => setUserInput(e.target.value)}
+            placeholder="Tell us about yourself..."
+            className={styles.input}
+            required
+          />
+          <button type="submit" className={styles.primary}>
+            Find Matches!
+          </button>
+        </form>
         <p>Takes less than 1 minute</p>
       </main>
     </div>
