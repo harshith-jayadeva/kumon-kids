@@ -43,11 +43,11 @@ export default function Home() {
             );
           }}
         </CldUploadWidget>
-        {url != "nothing" && (
+        {urlList[0] && (
           <img
             className={styles.uploaded}
             aria-hidden
-            src={url}
+            src={urlList[0]}
             alt="uploaded image"
             style={{ maxWidth: "1000px", maxHeight: "auto" }}
           />
