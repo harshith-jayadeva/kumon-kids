@@ -343,7 +343,7 @@ a.secondary {
   min-width: 158px;
   font-size: 16px;
   padding: 0 16px;
-  
+  font-family: var(--font-geist-sans);
 }
 
 .uploadButton:hover {
