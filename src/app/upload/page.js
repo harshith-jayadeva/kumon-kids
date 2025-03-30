@@ -1,12 +1,15 @@
 "use client";
 
 import styles from "../page.module.css";
+import { useRouter } from 'next/navigation';
 import Link from "next/link";
 import { CldUploadWidget } from "next-cloudinary";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
+import { useUser } from "../userContext.js";
+import Image from "next/image";
 
 import { db } from "../../../firebaseConfig";
-import { doc, setDoc } from "firebase/firestore";
+import { addDoc, collection } from "firebase/firestore";
 
 const ExpandableBioText = ({ bioRef }) => {
   return (
@@ -58,21 +61,70 @@ const ExpandableLastNameText = ({ lastNameRef}) => {
   );
 };
 
-
-const uploadData = async (collectionName, id, data) => {
+const uploadData = async (collectionName, data, setUserId) => {
   try {
     // await setDoc(doc(db, "users", "john-pork"), testUser);
-    await setDoc(doc(db, collectionName, id), data);
+    // await setDoc(doc(db, collectionName, id), data);
+    const docRef = await addDoc(collection(db, collectionName), data);
+
+    // add current user's ID to global context
+    console.log("Document written with ID: ", docRef.id);
+    setUserId(docRef.id);
+    return docRef.id;
   } catch (error) {
     console.error("Error writing document: ", error);
   }
 };
 
 export default function Home() {
+  const { setUserId } = useUser();
+  // console.log("ID 1: " + setUserId);
   const [urlList, setUrlList] = useState([]);
   const firstNameRef = useRef(null);
   const lastNameRef = useRef(null);
   const bioRef = useRef(null);
+
+  const [groqResponse, setGroqResponse] = useState('');
+  const [loading, setLoading] = useState(true);
+  const [isNavigationAllowed, setIsNavigationAllowed] = useState(false);
+  const router = useRouter();
+
+  const writeTextFile = async (result) => {
+    try {
+      const response = await fetch('/api/write-text-file', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ data: result }),
+      });
+  
+      if (!response.ok) {
+        throw new Error('Failed to write text file.');
+      }
+    } catch (error) {
+      console.error('Error writing text file:', error);
+      alert('Error writing text file.');
+    }
+  };
+  
+  async function fetchData(currentUserId) {
+    console.log("Fetch data");
+    try {
+      const response = await fetch('/api/groq', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ currentUserId: currentUserId }),
+      });
+      const data = await response.json();
+      setGroqResponse(data.aiResponse);
+      await writeTextFile(data.aiResponse);
+    } catch (error) {
+      console.error("API Error:", error);
+      setGroqResponse("Error fetching data.");
+    } finally {
+      setLoading(false);
+      setIsNavigationAllowed(true);
+    }
+  }
 
   const submit = () => {
     const firstName = firstNameRef.current ? firstNameRef.current.value:"";
@@ -82,17 +134,20 @@ export default function Home() {
   
 
     const data = {
-      name: fullName, 
-      lastName: lastName,
+      first_name: firstName, 
+      last_name: lastName,
       bio: bio,
       image_urls: urlList,
     };
 
-    console.log(data);
-
-    const userId = "user-" + Date.now();
-    //uploadData("users", userId, data);
+    return data;
   };
+
+  useEffect(() => {
+    if (isNavigationAllowed) {
+      router.push('/matches');
+    }
+  }, [isNavigationAllowed, router]);
 
   return (
     <div className={styles.page}>
@@ -117,7 +172,7 @@ export default function Home() {
             );
           }}
         </CldUploadWidget>
-        {urlList[0] && (
+        {/* {urlList[0] && (
           <img
             className={styles.uploaded}
             aria-hidden
@@ -125,7 +180,7 @@ export default function Home() {
             alt="uploaded image"
             style={{ maxWidth: "1000px", maxHeight: "auto" }}
           />
-        )}
+        )} */}
         <div className={styles.inputArea}>
           <div className={styles.nameArea}>
             <div className={styles.firstName}>
@@ -143,23 +198,21 @@ export default function Home() {
           <h3>List your hometown, interests, and hobbies!</h3>
           <ExpandableBioText bioRef={bioRef}/>
         </div>
-      
-        <div
-          className={styles.button}
-          // onClick={() => {
-          //   const data = {
-          //     name: "John Pork",
-          //     bio: "hi my name is john pork",
-          //     image_urls: urlList,
-          //   };
-          //   uploadData("users", "exampleuser1", data);
-          // }}
 
-          onClick={submit}
+        <div className={styles.button}
+          onClick={async (event) => {
+            event.preventDefault();
+            const data = submit();
+            const currentUserId = await uploadData("users", data, setUserId);
+            await fetchData(currentUserId);
+            router.push('/matches');
+          }}
         >
-          <Link href="/matches" className={styles.primary}>
-            Get your matches!
-          </Link>
+          <div className={styles.buttonPapa}>
+            <button href="/matches" className={styles.uploadButton}>
+              Get your matches!
+            </button>
+          </div>
         </div>
       </main>
     </div>
