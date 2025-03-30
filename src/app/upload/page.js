@@ -3,10 +3,14 @@
 import styles from "../page.module.css";
 import Link from "next/link";
 import { CldUploadWidget } from "next-cloudinary";
-import { useRef, useState } from "react";
+import { useState, useRef, useEffect } from "react";
+import { useUser } from "../userContext.js";
 
 import { db } from "../../../firebaseConfig";
-import { doc, setDoc } from "firebase/firestore";
+import { addDoc, collection } from "firebase/firestore";
+
+
+const uploadData = async (collectionName, data, setUserId) => {
 
 const ExpandableBioText = ({ bioRef }) => {
   return (
@@ -62,14 +66,21 @@ const ExpandableLastNameText = ({ lastNameRef}) => {
 const uploadData = async (collectionName, id, data) => {
   try {
     // await setDoc(doc(db, "users", "john-pork"), testUser);
-    await setDoc(doc(db, collectionName, id), data);
+    // await setDoc(doc(db, collectionName, id), data);
+    const docRef = await addDoc(collection(db, collectionName), data);
+
+    // add current user's ID to global context
+    console.log("Document written with ID: ", docRef.id);
+    setUserId(docRef.id);
   } catch (error) {
     console.error("Error writing document: ", error);
   }
 };
 
 export default function Home() {
+  const { setUserId } = useUser();
   const [urlList, setUrlList] = useState([]);
+
   const firstNameRef = useRef(null);
   const lastNameRef = useRef(null);
   const bioRef = useRef(null);
@@ -93,6 +104,7 @@ export default function Home() {
     const userId = "user-" + Date.now();
     //uploadData("users", userId, data);
   };
+
 
   return (
     <div className={styles.page}>
@@ -146,17 +158,19 @@ export default function Home() {
       
         <div
           className={styles.button}
-          // onClick={() => {
-          //   const data = {
-          //     name: "John Pork",
-          //     bio: "hi my name is john pork",
-          //     image_urls: urlList,
-          //   };
-          //   uploadData("users", "exampleuser1", data);
-          // }}
-
-          onClick={submit}
+          onClick={() => {
+            // if this breaks this is why maybe
+            submit();
+            const data = {
+              first_name: firstNameRef,
+              last_name: lastNameRef,
+              bio: bioRef,
+              image_urls: urlList,
+            };
+            uploadData("users", data, setUserId);
+          }}
         >
+        
           <Link href="/matches" className={styles.primary}>
             Get your matches!
           </Link>
