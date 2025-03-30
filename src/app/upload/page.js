@@ -3,22 +3,28 @@
 import styles from "../page.module.css";
 import Link from "next/link";
 import { CldUploadWidget } from "next-cloudinary";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useUser } from "../userContext.js";
 
 import { db } from "../../../firebaseConfig";
 import { addDoc, collection } from "firebase/firestore";
 
-const uploadData = async (collectionName, data) => {
+const uploadData = async (collectionName, data, setUserId) => {
   try {
     // await setDoc(doc(db, "users", "john-pork"), testUser);
     // await setDoc(doc(db, collectionName, id), data);
-    await addDoc(collection(db, collectionName), data);
+    const docRef = await addDoc(collection(db, collectionName), data);
+
+    // add current user's ID to global context
+    console.log("Document written with ID: ", docRef.id);
+    setUserId(docRef.id);
   } catch (error) {
     console.error("Error writing document: ", error);
   }
 };
 
 export default function Home() {
+  const { setUserId } = useUser();
   const [urlList, setUrlList] = useState([]);
   return (
     <div className={styles.page}>
@@ -61,7 +67,7 @@ export default function Home() {
               bio: "did you get in a truck wreck bc i can help u bro",
               image_urls: urlList,
             };
-            uploadData("users", data);
+            uploadData("users", data, setUserId);
           }}
         >
           <Link href="/matches" className={styles.primary}>
