@@ -1,9 +1,17 @@
-Comparison with Alice: * Compatibility Percentage: 10% * Relevant Tags: #food #coding
-Comparison with Bob: * Compatibility Percentage: 20% * Relevant Tags: #entertainment #music
-Comparison with Charlie: * Compatibility Percentage: 10% * Relevant Tags: #data #recipes
-Comparison with Diana: * Compatibility Percentage: 30% * Relevant Tags: #design #foodblog
-Comparison with Ethan: * Compatibility Percentage: 40% * Relevant Tags: #nutrition #wellness
-Comparison with Fiona: * Compatibility Percentage: 20% * Relevant Tags: #history #culture
-Comparison with George: * Compatibility Percentage: 10% * Relevant Tags: #gaming #tech
-Comparison with Hannah: * Compatibility Percentage: 30% * Relevant Tags: #journalism #foodwriting
-Comparison with Ian: * Compatibility Percentage: 10% * Relevant Tags: #cybersecurity #tech
+Comparison with Sammy: * Compatibility Percentage: 100% * Relevant Tags: #skiing #biking #computerScience
+Comparison with undefined: * Compatibility Percentage: 0% * Relevant Tags: 
+Comparison with Haiden: * Compatibility Percentage: 33% * Relevant Tags: #skiing #coding
+Comparison with Boris: * Compatibility Percentage: 40% * Relevant Tags: #skiing #biking #engineering
+Comparison with : * Compatibility Percentage: 0% * Relevant Tags: 
+Comparison with Brennan: * Compatibility Percentage: 20% * Relevant Tags: #skiing
+Comparison with Holly: * Compatibility Percentage: 0% * Relevant Tags: 
+Comparison with George: * Compatibility Percentage: 20% * Relevant Tags: #hiking #coding
+Comparison with Adam: * Compatibility Percentage: 20% * Relevant Tags: #biking
+Comparison with Quinn: * Compatibility Percentage: 40% * Relevant Tags: #skiing #computerScience
+Comparison with John: * Compatibility Percentage: 20% * Relevant Tags: #biking
+Comparison with john: * Compatibility Percentage: 40% * Relevant Tags: #skiing #biking
+Comparison with Jaci: * Compatibility Percentage: 40% * Relevant Tags: #skiing #computerScience
+Comparison with Sydney: * Compatibility Percentage: 20% * Relevant Tags: #skiing
+Comparison with Kayla: * Compatibility Percentage: 20% * Relevant Tags: #coding
+Comparison with Prim: * Compatibility Percentage: 20% * Relevant Tags: #hiking
+Comparison with Allison: * Compatibility Percentage: 20% * Relevant Tags: #biking
