@@ -53,7 +53,33 @@ export async function POST(request) {
 
         const result = chunks.join('');
 
-        return NextResponse.json({ aiResponse: result });
+        const comparisons = result.split('\n');
+        const compatibilityScores = [];
+        comparisons.forEach(comp => {
+            const percentageMatch = comp.match(/Compatibility Percentage: (\d+)%/);
+            const tagsMatch = comp.match(/Relevant Tags: (.+)/);
+            const userMatch = comp.match(/Comparison with (.+?):/);
+
+            if (percentageMatch && tagsMatch && userMatch) {
+                compatibilityScores.push({
+                    user: userMatch[1],
+                    percentage: parseInt(percentageMatch[1]),
+                    tags: tagsMatch[1]
+                });
+            }
+        });
+
+        compatibilityScores.sort((a, b) => b.percentage - a.percentage);
+
+        let sortedOutput = "";
+        for (let i = 0; i < 9; i++) {
+            sortedOutput += `Comparison with ${compatibilityScores[i].user}: * Compatibility Percentage: ${compatibilityScores[i].percentage}% * Relevant Tags: ${compatibilityScores[i].tags}\n\n`;
+        }
+        // compatibilityScores.forEach(score => {
+        //     sortedOutput += `Comparison with ${score.user}: * Compatibility Percentage: ${score.percentage}% * Relevant Tags: ${score.tags}\n\n`;
+        // });
+
+        return NextResponse.json({ aiResponse: sortedOutput });
     } catch (error) {
         console.error("Groq API error:", error);
         return NextResponse.json({ error: "Groq API error" }, { status: 500 });
