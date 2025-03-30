@@ -44,3 +44,27 @@ export const getUserImageFromName = async (userName) => {
     return null;
   }
 };
+
+export const getUserBioFromName = async (userName) => {
+  try {
+    const querySnapshot = await getDocs(
+      collection(db, "users"),
+      where("first_name", "==", userName)
+    );
+
+    if (querySnapshot.empty) {
+      console.log("No matching documents.");
+      return null;
+    }
+
+    let userBio = null;
+    querySnapshot.forEach((doc) => {
+      userBio = doc.data().bio;
+    });
+
+    return userBio;
+  } catch (error) {
+    console.error("Error retrieving user image:", error);
+    return null;
+  }
+};

@@ -1,12 +1,12 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { getUserImageFromName } from "../parseFirebaseData";
+import { getUserImageFromName, getUserBioFromName } from "../parseFirebaseData";
 import styles from "../page.module.css"; // Import the CSS module
 
 export default function MatchCard({ userName, compatibility, bio, tags }) {
   const [imageUrl, setImageUrl] = useState(null);
-
+  const [userBio, setUserBio] = useState(null);
   useEffect(() => {
     const loadImage = async () => {
       const url = await getUserImageFromName(userName);
@@ -14,19 +14,38 @@ export default function MatchCard({ userName, compatibility, bio, tags }) {
       setImageUrl(url[0]);
     };
 
+    const loadBio = async () => {
+      const bio = await getUserBioFromName(userName);
+      console.log("bio ", bio);
+      setUserBio(bio);
+    };
+
     loadImage();
+    loadBio();
   }, [userName]);
 
   return (
-    <div className={styles.mItem}>
+    <div
+      className={styles.mItem}
+      style={{
+        width: "150px", // fixed width
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        padding: "15px",
+        minHeight: "340px",
+        height: "100%",
+      }}
+    >
       <div
         style={{
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
           width: "100%",
-          height: "100px", // Fixed height container
+          height: "80px",
           overflow: "hidden",
+          marginBottom: "10px",
         }}
       >
         <img
@@ -36,21 +55,34 @@ export default function MatchCard({ userName, compatibility, bio, tags }) {
           }
           alt={userName}
           style={{
-            width: "100px", // Fixed width
-            height: "100px", // Fixed height
-            objectFit: "cover", // This will maintain aspect ratio
-            borderRadius: "16px", // Optional: adds rounded corners
+            width: "80px",
+            height: "80px",
+            objectFit: "cover",
+            borderRadius: "16px",
           }}
         />
       </div>
-      <h2>{userName}</h2>
-      <p>{bio}</p>
-      <p>
-        <strong>Compatibility:</strong> {compatibility}%
-      </p>
-      <p>
-        <strong>Tags:</strong> {tags.join(", ")}
-      </p>
+      <div
+        style={{
+          width: "100%",
+          flex: "1",
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
+        <h2 style={{ fontSize: "1rem", margin: "8px 0" }}>{userName}</h2>
+        <p style={{ fontSize: "0.8rem", margin: "4px 0", flex: "1" }}>
+          {userBio}
+        </p>
+        <div style={{ marginTop: "auto" }}>
+          <p style={{ fontSize: "0.8rem", margin: "4px 0" }}>
+            <strong>Compatibility:</strong> {compatibility}%
+          </p>
+          <p style={{ fontSize: "0.8rem", margin: "4px 0" }}>
+            <strong>Tags:</strong> {tags.join(", ")}
+          </p>
+        </div>
+      </div>
     </div>
   );
 }

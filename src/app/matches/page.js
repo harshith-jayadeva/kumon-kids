@@ -49,20 +49,26 @@ export default async function Page() {
       <main className={styles.main}>
         <h1 id={styles.matches}>Matches</h1>
 
-        <div className={styles.button}>
-          <div className={styles.mWrapper}>
-            <div className={styles.mContainer}>
-              {matches.map((match, index) => (
-                <MatchCard
-                  key={index}
-                  userName={match.name}
-                  compatibility={match.compatibility}
-                  bio={match.bio}
-                  tags={match.tags}
-                />
-              ))}
-            </div>
-          </div>
+        <div
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            gap: "20px",
+            padding: "20px",
+            justifyContent: "center",
+            width: "510px",
+            margin: "0 auto",
+          }}
+        >
+          {matches.map((match, index) => (
+            <MatchCard
+              key={index}
+              userName={match.name}
+              compatibility={match.compatibility}
+              bio={match.bio}
+              tags={match.tags}
+            />
+          ))}
         </div>
         <div className={styles.button}>
           <Link href="./" className={styles.primary}>
