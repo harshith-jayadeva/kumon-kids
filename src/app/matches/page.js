@@ -1,11 +1,11 @@
 import Image from "next/image";
 import styles from "../page.module.css";
 import Link from "next/link";
-
 import { promises as fs } from "fs";
 import path from "path";
+import MatchCard from "./MatchCard"; // Import the client component
 
-export default async function LocalTextDisplay() {
+export default async function Page() {
   let matches = [];
   // Read the text file - adjust the path as needed
   const textFilePath = path.join(process.cwd(), "src/app/ai-output.txt");
@@ -49,30 +49,27 @@ export default async function LocalTextDisplay() {
       <main className={styles.main}>
         <h1 id={styles.matches}>Matches</h1>
 
-        <div className={styles.button}>
-          <div className={styles.mWrapper}>
-            <div className={styles.mContainer}>
-              {matches.map((match) => (
-                <div key={match.name} className={styles.mItem}>
-                  <img
-                    src={`/images/${match.profilePic}`}
-                    alt={match.name}
-                    className="profile-pic"
-                  />
-                  <h2>{match.name}</h2>
-                  <p>{match.bio}</p>
-                  <p>
-                    <strong>Compatibility:</strong> {match.compatibility}%
-                  </p>
-                  <p>
-                    <strong>Tags:</strong> {match.tags.join(", ")}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
+        <div
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            gap: "20px",
+            padding: "20px",
+            justifyContent: "center",
+            width: "510px",
+            margin: "0 auto",
+          }}
+        >
+          {matches.map((match, index) => (
+            <MatchCard
+              key={index}
+              userName={match.name}
+              compatibility={match.compatibility}
+              bio={match.bio}
+              tags={match.tags}
+            />
+          ))}
         </div>
-
         <div className={styles.button}>
           <Link href="./" className={styles.primary}>
             Start Over
