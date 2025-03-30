@@ -18,5 +18,5 @@ export const convertFirebaseDataToUserDictionary = async (currentUserId) => {
     allUsersWithBios[firstName] = bio;
   });
 
-  return [allUsersWithBios, currentUserId];
+  return [allUsersWithBios, currentUserIndex];
 };

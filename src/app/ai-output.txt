@@ -1,9 +1,9 @@
-Comparison with Alice: * Compatibility Percentage: 10% * Relevant Tags: #food #coding
-Comparison with Bob: * Compatibility Percentage: 20% * Relevant Tags: #entertainment #music
-Comparison with Charlie: * Compatibility Percentage: 10% * Relevant Tags: #data #recipes
-Comparison with Diana: * Compatibility Percentage: 30% * Relevant Tags: #design #foodblog
-Comparison with Ethan: * Compatibility Percentage: 40% * Relevant Tags: #nutrition #wellness
-Comparison with Fiona: * Compatibility Percentage: 20% * Relevant Tags: #history #culture
-Comparison with George: * Compatibility Percentage: 10% * Relevant Tags: #gaming #tech
-Comparison with Hannah: * Compatibility Percentage: 30% * Relevant Tags: #journalism #foodwriting
-Comparison with Ian: * Compatibility Percentage: 10% * Relevant Tags: #cybersecurity #tech
+Comparison with Sammy: * Compatibility Percentage: 100% * Relevant Tags: #skiing #biking #computerScience
+Comparison with Haiden: * Compatibility Percentage: 33% * Relevant Tags: #skiing #coding
+Comparison with Holly: * Compatibility Percentage: 0% * Relevant Tags: 
+Comparison with Adam: * Compatibility Percentage: 17% * Relevant Tags: #biking
+Comparison with john: * Compatibility Percentage: 29% * Relevant Tags: #skiing #biking
+Comparison with Jaci: * Compatibility Percentage: 50% * Relevant Tags: #skiing #computerScience
+Comparison with Sydney: * Compatibility Percentage: 17% * Relevant Tags: #skiing
+Comparison with Kayla: * Compatibility Percentage: 17% * Relevant Tags: #coding
+Comparison with Allison: * Compatibility Percentage: 17% * Relevant Tags: #biking
