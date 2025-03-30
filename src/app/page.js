@@ -43,11 +43,11 @@ export default function Home() {
         }
     };
 
-    return (
-        <div>
-            <h1>Meet a Friend Compatibility Results:</h1>
-            {loading && <p>Loading...</p>}
-            <p>{groqResponse}</p>
-        </div>
-    );
+    // return (
+    //     <div>
+    //         <h1>Meet a Friend Compatibility Results:</h1>
+    //         {loading && <p>Loading...</p>}
+    //         <p>{groqResponse}</p>
+    //     </div>
+    // );
 }
