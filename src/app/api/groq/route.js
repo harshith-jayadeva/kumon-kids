@@ -24,7 +24,7 @@ export async function POST(request) {
 
         let comparisonMessages = "";
         for (const key in peopleBios) {
-            if (key !== currentPersonKey || key !== undefined) {
+            if (key !== currentPersonKey && key !== undefined) {
                 comparisonMessages += `Compare ${currentPersonKey} ("${currentPersonBio}") with ${key} ("${peopleBios[key]}"). Output EXACTLY like this example, NO other text:\nComparison with ${key}: * Compatibility Percentage: 50% * Relevant Tags: #example #tags\n\n`;
             }
         }
