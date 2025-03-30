@@ -1,12 +1,18 @@
 :root {
+  --gradient: linear-gradient(#ffffff, #c8d8e4);
   --background: #ffffff;
   --foreground: #171717;
+  --accent1: #2b6777;
+  --accent2: #c8d8e4;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
+    --gradient: linear-gradient(#0a0a0a, #0e2a3f);
     --background: #0a0a0a;
     --foreground: #ededed;
+    --accent1: #c8d8e4;
+    --accent2: #2b6777;
   }
 }
 
@@ -18,7 +24,7 @@ body {
 
 body {
   color: var(--foreground);
-  background: var(--background);
+  background: var(--gradient);
   font-family: Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
