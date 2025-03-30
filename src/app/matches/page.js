@@ -64,6 +64,11 @@ export default async function Page() {
             </div>
           </div>
         </div>
+        <div className={styles.button}>
+          <Link href="./" className={styles.primary}>
+            Start Over
+          </Link>
+        </div>
       </main>
     </div>
   );
