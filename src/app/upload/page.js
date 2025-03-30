@@ -5,36 +5,64 @@ import Link from "next/link";
 import { CldUploadWidget } from "next-cloudinary";
 import { useState } from "react";
 
+import { db } from "../../../firebaseConfig";
+import { doc, setDoc } from "firebase/firestore";
+
+const uploadData = async (collectionName, id, data) => {
+  try {
+    // await setDoc(doc(db, "users", "john-pork"), testUser);
+    await setDoc(doc(db, collectionName, id), data);
+  } catch (error) {
+    console.error("Error writing document: ", error);
+  }
+};
+
 export default function Home() {
-  const [url, setUrl] = useState("nothing");
+  const [urlList, setUrlList] = useState([]);
+
   return (
     <div className={styles.page}>
       <main className={styles.main}>
         <h1 id={styles.matches}>Enter Your Information</h1>
         <h2>Upload a Profile Picture</h2>
-        <CldUploadWidget 
+        <CldUploadWidget
           uploadPreset="user-image-upload"
           onSuccess={(result) => {
-            console.log("the image upload worked yay");
-            console.log("secure url: ", result.info.secure_url);
-            setUrl(result.info.secure_url);
+            console.log("Image upload successful");
+            console.log("Secure URL:", result.info.secure_url);
+            setUrlList((prevUrls) => [...prevUrls, result.info.secure_url]);
           }}
         >
-          
-            {({ open }) => {
-              return <div className={styles.buttonPapa}><button className={styles.uploadButton} onClick={() => open()}>Upload an Image</button></div>;
-            }}
-          
-          
+          {({ open }) => {
+            return (
+              <div className={styles.buttonPapa}>
+                <button className={styles.uploadButton} onClick={() => open()}>
+                  Upload an Image
+                </button>
+              </div>
+            );
+          }}
         </CldUploadWidget>
-        {url != "nothing" && (<img className={styles.uploaded}
+        {url != "nothing" && (
+          <img
+            className={styles.uploaded}
             aria-hidden
             src={url}
             alt="uploaded image"
-            style={{maxWidth: '1000px', maxHeight: 'auto'}}
+            style={{ maxWidth: "1000px", maxHeight: "auto" }}
           />
         )}
-        <div className={styles.button}>
+        <div
+          className={styles.button}
+          onClick={() => {
+            const data = {
+              name: "John Pork",
+              bio: "hi my name is john pork",
+              image_urls: urlList,
+            };
+            uploadData("users", "exampleuser1", data);
+          }}
+        >
           <Link href="/matches" className={styles.primary}>
             Get your matches!
           </Link>
