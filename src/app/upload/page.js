@@ -6,12 +6,13 @@ import { CldUploadWidget } from "next-cloudinary";
 import { useState } from "react";
 
 import { db } from "../../../firebaseConfig";
-import { doc, setDoc } from "firebase/firestore";
+import { addDoc, collection } from "firebase/firestore";
 
-const uploadData = async (collectionName, id, data) => {
+const uploadData = async (collectionName, data) => {
   try {
     // await setDoc(doc(db, "users", "john-pork"), testUser);
-    await setDoc(doc(db, collectionName, id), data);
+    // await setDoc(doc(db, collectionName, id), data);
+    await addDoc(collection(db, collectionName), data);
   } catch (error) {
     console.error("Error writing document: ", error);
   }
@@ -19,7 +20,6 @@ const uploadData = async (collectionName, id, data) => {
 
 export default function Home() {
   const [urlList, setUrlList] = useState([]);
-
   return (
     <div className={styles.page}>
       <main className={styles.main}>
@@ -56,11 +56,12 @@ export default function Home() {
           className={styles.button}
           onClick={() => {
             const data = {
-              name: "John Pork",
-              bio: "hi my name is john pork",
+              first_name: "frank",
+              last_name: "azar",
+              bio: "did you get in a truck wreck bc i can help u bro",
               image_urls: urlList,
             };
-            uploadData("users", "exampleuser1", data);
+            uploadData("users", data);
           }}
         >
           <Link href="/matches" className={styles.primary}>
