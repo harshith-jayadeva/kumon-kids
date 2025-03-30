@@ -11,6 +11,8 @@
   "dependencies": {
     "groq-sdk": "^0.17.0",
     "next": "^15.2.4",
+    "firebase": "^11.5.0",
+    "next-cloudinary": "^6.16.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   }
