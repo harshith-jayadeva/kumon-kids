@@ -15,9 +15,9 @@ export default function MatchCard({ userName, compatibility, bio, tags }) {
     };
 
     const loadBio = async () => {
-      const bio = await getUserBioFromName(userName);
-      console.log("bio ", bio);
-      setUserBio(bio);
+      const bio2 = await getUserBioFromName(userName);
+      console.log("bio ", bio2);
+      setUserBio(bio2);
     };
 
     loadImage();
@@ -33,7 +33,7 @@ export default function MatchCard({ userName, compatibility, bio, tags }) {
         flexDirection: "column",
         alignItems: "center",
         padding: "15px",
-        minHeight: "340px",
+        minHeight: "370px",
         height: "100%",
       }}
     >

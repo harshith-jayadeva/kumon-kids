@@ -46,25 +46,16 @@ export const getUserImageFromName = async (userName) => {
 };
 
 export const getUserBioFromName = async (userName) => {
-  try {
-    const querySnapshot = await getDocs(
-      collection(db, "users"),
-      where("first_name", "==", userName)
-    );
+  let allUsersWithBios = {};
+  const querySnapshot = await getDocs(collection(db, "users"));
+  querySnapshot.forEach((doc, i) => {
+    const userData = doc.data();
 
-    if (querySnapshot.empty) {
-      console.log("No matching documents.");
-      return null;
-    }
+    const firstName = userData.first_name;
+    const bio = userData.bio;
 
-    let userBio = null;
-    querySnapshot.forEach((doc) => {
-      userBio = doc.data().bio;
-    });
+    allUsersWithBios[firstName] = bio;
+  });
 
-    return userBio;
-  } catch (error) {
-    console.error("Error retrieving user image:", error);
-    return null;
-  }
+  return allUsersWithBios[userName];
 };
