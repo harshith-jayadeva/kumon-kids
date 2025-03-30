@@ -38,7 +38,12 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 ## Git Commands
 
 ```
+git checkout -b [branch name]
+
 git add .
 git commit -m "[your message]"
 git push origin [branch name]
+
+git fetch
+git pull
 ```
